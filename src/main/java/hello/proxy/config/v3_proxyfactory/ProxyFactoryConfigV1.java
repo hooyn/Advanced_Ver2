@@ -37,11 +37,11 @@ public class ProxyFactoryConfigV1 {
 
     @Bean
     public OrderRepositoryV1 orderRepositoryV1(LogTrace logTrace){
-        OrderRepositoryV1Impl orderRepository = new OrderRepositoryV1Impl();
-        ProxyFactory factory = new ProxyFactory(orderRepository);
+        OrderRepositoryV1Impl orderRepository = new OrderRepositoryV1Impl(); //target 객체 생성
+        ProxyFactory factory = new ProxyFactory(orderRepository); //ProxyFacroty에 target Input
 
-        factory.addAdvisor(getAdvisor(logTrace));
-        OrderRepositoryV1 proxy = (OrderRepositoryV1) factory.getProxy();
+        factory.addAdvisor(getAdvisor(logTrace)); //Advisor 추가
+        OrderRepositoryV1 proxy = (OrderRepositoryV1) factory.getProxy(); //프록시 가져오기
         log.info("ProxyFactory proxy={}, target={}", proxy.getClass(), orderRepository.getClass());
         return proxy;
     }
